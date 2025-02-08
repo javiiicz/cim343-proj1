@@ -1,0 +1,52 @@
+body {
+    font-family: Courier, monospace;
+}
+
+.title_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: underline orange;
+}
+
+.game_container {
+    border-style: dotted;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.cards_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.button_container{
+    height: 100px;
+    background: #fefae0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-weight: 900;
+    border-radius: 10px;
+}
+
+.button_container.card_selected {
+    background: #000000;
+    color: #FFF;
+}
+
+.button_container:hover {
+    background: #faedcd;
+}
+
+.button_container.card_selected:hover {
+    background: #000000;
+}

@@ -1,16 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Game !</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Javier's Connections</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-<body>
-    <button>Option A</button>
-    <button>Option B</button>
-    <button>Option C</button>
-</body>
+    <body>
+        <div class="title_container">
+            <h1>UM Connections</h1>
+        </div>
+
+        <div class="game_container">
+            <div class="cards_container">
+                <div class="button_container" id="(0,0)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(0,1)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(0,2)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(0,3)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(1,0)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(1,1)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(1,2)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(1,3)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(2,0)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(2,1)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(2,2)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(2,3)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(3,0)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(3,1)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(3,2)" onclick="card_select(this)">
+                    WORD
+                </div>
+                <div class="button_container" id="(3,3)" onclick="card_select(this)">
+                    WORD
+                </div>
+            </div>
+
+            <div class="mistakes_container">
+                Mistakes Remaining: <span id="lives">⚫ ⚫ ⚫ ⚫</span>
+            </div>
+
+            <div class="menu_container">
+                <button onclick="populate()">Shuffle</button>
+                <button>Deselect All</button>
+                <button>Submit</button>
+            </div>
+        </div>
+        
+    </body>
+
+    <script>
+        var selected = new Set();
+        var words = ["w1","w2","w3","w4","w5","w6","w7","w8","w9","w10","w11","w12","w13","w14","w15","w16"];
+
+        function card_select(card){
+            if (selected.has(card)) {
+                selected.delete(card)
+                card.classList.remove('card_selected')
+            } else if (selected.size == 4) {
+                return
+            } else {
+                selected.add(card)
+                card.classList.add('card_selected')
+            }
+        }
+
+        function populate(){
+            shuffleArray(words);
+            for (var i = 0; i < 4; i++){
+                for (var j = 0; j < 4; j++){
+                    var word = words[4 * i + j];
+                    var card = document.getElementById("("+i+","+j+")");
+                    card.textContent = word;
+                }
+            }
+        }
+
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i >= 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        populate()
+    </script>
 
 </html>
