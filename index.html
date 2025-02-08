@@ -16,52 +16,52 @@
         <div class="game_container">
             <div class="cards_container">
                 <div class="button_container" id="(0,0)" onclick="card_select(this)">
-                    WORD
+                    Eco
                 </div>
                 <div class="button_container" id="(0,1)" onclick="card_select(this)">
-                    WORD
+                    Scuba
                 </div>
                 <div class="button_container" id="(0,2)" onclick="card_select(this)">
-                    WORD
+                    Pear
                 </div>
                 <div class="button_container" id="(0,3)" onclick="card_select(this)">
-                    WORD
+                    Sushi
                 </div>
                 <div class="button_container" id="(1,0)" onclick="card_select(this)">
-                    WORD
+                    Cook
                 </div>
                 <div class="button_container" id="(1,1)" onclick="card_select(this)">
-                    WORD
+                    Empanadas
                 </div>
                 <div class="button_container" id="(1,2)" onclick="card_select(this)">
-                    WORD
+                    Bagels
                 </div>
                 <div class="button_container" id="(1,3)" onclick="card_select(this)">
-                    WORD
+                    Row
                 </div>
                 <div class="button_container" id="(2,0)" onclick="card_select(this)">
-                    WORD
+                    Meteor
                 </div>
                 <div class="button_container" id="(2,1)" onclick="card_select(this)">
-                    WORD
+                    Village
                 </div>
                 <div class="button_container" id="(2,2)" onclick="card_select(this)">
-                    WORD
+                    Salsa
                 </div>
                 <div class="button_container" id="(2,3)" onclick="card_select(this)">
-                    WORD
+                    Swim
                 </div>
                 <div class="button_container" id="(3,0)" onclick="card_select(this)">
-                    WORD
+                    Lake
                 </div>
                 <div class="button_container" id="(3,1)" onclick="card_select(this)">
-                    WORD
+                    Salads
                 </div>
                 <div class="button_container" id="(3,2)" onclick="card_select(this)">
-                    WORD
+                    Geo
                 </div>
                 <div class="button_container" id="(3,3)" onclick="card_select(this)">
-                    WORD
+                    Psyche
                 </div>
             </div>
 
@@ -70,8 +70,7 @@
             </div>
 
             <div class="menu_container">
-                <button onclick="populate()">Shuffle</button>
-                <button>Deselect All</button>
+                <button onclick="deselect()">Deselect All</button>
                 <button>Submit</button>
             </div>
         </div>
@@ -80,7 +79,10 @@
 
     <script>
         var selected = new Set();
-        var words = ["w1","w2","w3","w4","w5","w6","w7","w8","w9","w10","w11","w12","w13","w14","w15","w16"];
+        var a1 = ["U3VzaGk=","RW1wYW5hZGFz","QmFnZWxz","U2FsYWRz"].sort();
+        var a2 = ["UGVhcg==","VmlsbGFnZQ==","TGFrZQ==","Um93"].sort();
+        var a3 = ["Q29vaw==","U2N1YmE=","U3dpbQ==","U2Fsc2E="].sort();
+        var a4 = ["RWNv","R2Vv","UHN5Y2hl","TWV0ZW9y"].sort();
 
         function card_select(card){
             if (selected.has(card)) {
@@ -94,27 +96,19 @@
             }
         }
 
-        function populate(){
-            shuffleArray(words);
-            for (var i = 0; i < 4; i++){
-                for (var j = 0; j < 4; j++){
-                    var word = words[4 * i + j];
-                    var card = document.getElementById("("+i+","+j+")");
-                    card.textContent = word;
-                }
+        function check(){
+            if (selected.size != 4) {
+                return
+            } else {
+
             }
         }
 
-        function shuffleArray(array) {
-            for (var i = array.length - 1; i >= 0; i--) {
-                var j = Math.floor(Math.random() * (i + 1));
-                var temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
+        function deselect(){
+            selected.forEach((card) => {
+                card_select(card);
+            })
         }
-
-        populate()
     </script>
 
 </html>

@@ -7,12 +7,12 @@ body {
     justify-content: center;
     align-items: center;
     text-decoration: underline orange;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .game_container {
-    border-style: dotted;
-    margin-left: 20%;
-    margin-right: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,21 +21,24 @@ body {
 }
 
 .cards_container {
-    width: 100%;
+    width: 900px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
 .button_container{
+    transition: all;
     height: 100px;
-    background: #fefae0;
+    background: #ecf8f8;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: x-large;
     font-weight: 900;
     border-radius: 10px;
+    user-select: none;
+    transition: all .2s;
 }
 
 .button_container.card_selected {
@@ -43,10 +46,28 @@ body {
     color: #FFF;
 }
 
-.button_container:hover {
-    background: #faedcd;
+.button_container:active {
+    background: #d4efef;
+
 }
 
 .button_container.card_selected:hover {
     background: #000000;
+
+}
+
+button {
+    background-color: #FFF;
+    border-width: 1px;
+    font-family: Courier, monospace;
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #F0F0F0;
+}
+
+button:active {
+    background-color: #B0B0B0;
 }
