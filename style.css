@@ -10,8 +10,9 @@ body {
     align-items: center;
     text-decoration: underline orange;
     font-size: 20px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-style: italic;
 }
 
 .game_container {
@@ -96,6 +97,7 @@ button:active {
     align-items: center;
     border-radius: 10px;
     font-weight: 600;
+    color: #fff;
 }
 
 .category#c1{
@@ -108,10 +110,31 @@ button:active {
     background-color: #2a9d8f;
 }
 .category#c4{
-    background-color: #991ee1;
+    background-color: #b55ce9;
 }
 
 .category p{
     display: inline-block;
     vertical-align: middle;
+}
+
+.solved1 {
+    color: #fff;
+    background-color: #f4a261;
+    pointer-events: none;
+}
+.solved2 {
+    color: #fff;
+    background-color: #e76f51;
+    pointer-events: none;
+}
+.solved3 {
+    color: #fff;
+    background-color: #2a9d8f;
+    pointer-events: none;
+}
+.solved4 {
+    color: #fff;
+    background-color: #b55ce9;
+    pointer-events: none;
 }

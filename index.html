@@ -130,15 +130,31 @@
             if (arraysEqual(user_answer, a1)) {
                 cat = document.getElementById("c1").children[0];
                 cat.textContent = atob("Rm9vZCBvbiBDYW1wdXM=");
+                selected.forEach((card) => {
+                    card.classList.add("solved1")
+                    card_select(card)
+                })
             } else if (arraysEqual(user_answer, a2)) {
                 cat = document.getElementById("c2").children[0];
                 cat.textContent = atob("Q2x1YnM=");
+                selected.forEach((card) => {
+                    card.classList.add("solved2")
+                    card_select(card)
+                })
             } else if (arraysEqual(user_answer, a3)) {
                 cat = document.getElementById("c3").children[0];
                 cat.textContent = atob("LW9sb2d5IE1ham9ycw==");
+                selected.forEach((card) => {
+                    card.classList.add("solved3")
+                    card_select(card)
+                })
             } else if (arraysEqual(user_answer, a4)) {
                 cat = document.getElementById("c4").children[0];
                 cat.textContent = atob("UGFydCBvZiBIb3VzaW5nIE5hbWVz");
+                selected.forEach((card) => {
+                    card.classList.add("solved4")
+                    card_select(card)
+                })
             } else {
 
             }
