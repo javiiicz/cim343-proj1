@@ -104,6 +104,7 @@
     var a3 = ['R2Vv', 'TWV0ZW9y', 'TXVzaWM=', 'Wm9v'].sort();
     var a4 = ['TGFrZQ==', 'UGVhcg==', 'Um93', 'VmlsbGFnZQ=='].sort();
     var lives = 4;
+    var found = 0;
 
     function card_select(card) {
         if (selected.has(card)) {
@@ -131,31 +132,47 @@
             if (arraysEqual(user_answer, a1)) {
                 cat = document.getElementById("c1").children[0];
                 cat.textContent = atob("Rm9vZCBvbiBDYW1wdXM=");
+                var c = 0;
                 selected.forEach((card) => {
                     card.classList.add("solved1")
                     card_select(card)
+                    strong_swap(card, document.getElementById("("+found+","+c+")"));
+                    c++;
                 })
+                found++;
             } else if (arraysEqual(user_answer, a2)) {
                 cat = document.getElementById("c2").children[0];
                 cat.textContent = atob("Q2x1YnM=");
+                var c = 0;
                 selected.forEach((card) => {
                     card.classList.add("solved2")
                     card_select(card)
+                    strong_swap(card, document.getElementById("("+found+","+c+")"));
+                    c++;
                 })
+                found++;
             } else if (arraysEqual(user_answer, a3)) {
                 cat = document.getElementById("c3").children[0];
                 cat.textContent = atob("LW9sb2d5IE1ham9ycw==");
+                var c = 0;
                 selected.forEach((card) => {
                     card.classList.add("solved3")
                     card_select(card)
+                    strong_swap(card, document.getElementById("("+found+","+c+")"));
+                    c++;
                 })
+                found++;
             } else if (arraysEqual(user_answer, a4)) {
                 cat = document.getElementById("c4").children[0];
                 cat.textContent = atob("UGFydCBvZiBIb3VzaW5nIE5hbWVz");
+                var c = 0;
                 selected.forEach((card) => {
                     card.classList.add("solved4")
                     card_select(card)
+                    strong_swap(card, document.getElementById("("+found+","+c+")"));
+                    c++;
                 })
+                found++;
             } else {
                 // Wrong guess
                 lives--;
@@ -172,8 +189,8 @@
     }
 
     function shuffle() {
-        for (var i = 15; i > 0; i--) {
-            var j = Math.floor(Math.random() * 16)
+        for (var i = 15; i > found * 4; i--) {
+            var j = Math.floor(Math.random() * (16 - found*4) + found*4);
             var si = "("+Math.floor(i/4)+","+i%4+")";
             var sj = "("+Math.floor(j/4)+","+j%4+")";
             var card_i = document.getElementById(si);
@@ -194,6 +211,15 @@
         var temp_text = a.textContent;
         a.textContent = b.textContent;
         b.textContent = temp_text;
+    }
+
+    function strong_swap(a,b){
+        var temp_text = a.textContent;
+        var temp_class = a.className;
+        a.textContent = b.textContent;
+        a.className = b.className;
+        b.textContent = temp_text;
+        b.className = temp_class;
     }
 
     function arraysEqual(a, b) {
