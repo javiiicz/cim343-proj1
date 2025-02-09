@@ -1,5 +1,7 @@
 body {
     font-family: Courier, monospace;
+    background-image: url(moroccan-flower.png);
+    background-color: rgb(F,F,F,0.1);
 }
 
 .title_container {
@@ -70,4 +72,46 @@ button:hover {
 
 button:active {
     background-color: #B0B0B0;
+}
+
+.answers_container{
+    width: 900px;
+    margin-bottom: 100px;
+}
+
+.categories_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.category {
+    text-align: center;
+    width: 150px;
+    padding: 30px;
+    font-size: large;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.category#c1{
+    background-color: #f4a261;
+}
+.category#c2{
+    background-color: #e76f51;
+}
+.category#c3{
+    background-color: #2a9d8f;
+}
+.category#c4{
+    background-color: #991ee1;
+}
+
+.category p{
+    display: inline-block;
+    vertical-align: middle;
 }

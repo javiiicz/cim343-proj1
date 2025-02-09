@@ -1,114 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Javier's Connections</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javier's Connections</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
-        <div class="title_container">
-            <h1>UM Connections</h1>
-        </div>
+<body>
+    <div class="title_container">
+        <h1>UM Connections</h1>
+    </div>
 
-        <div class="game_container">
-            <div class="cards_container">
-                <div class="button_container" id="(0,0)" onclick="card_select(this)">
-                    Eco
-                </div>
-                <div class="button_container" id="(0,1)" onclick="card_select(this)">
-                    Scuba
-                </div>
-                <div class="button_container" id="(0,2)" onclick="card_select(this)">
-                    Pear
-                </div>
-                <div class="button_container" id="(0,3)" onclick="card_select(this)">
-                    Sushi
-                </div>
-                <div class="button_container" id="(1,0)" onclick="card_select(this)">
-                    Cook
-                </div>
-                <div class="button_container" id="(1,1)" onclick="card_select(this)">
-                    Empanadas
-                </div>
-                <div class="button_container" id="(1,2)" onclick="card_select(this)">
-                    Bagels
-                </div>
-                <div class="button_container" id="(1,3)" onclick="card_select(this)">
-                    Row
-                </div>
-                <div class="button_container" id="(2,0)" onclick="card_select(this)">
-                    Meteor
-                </div>
-                <div class="button_container" id="(2,1)" onclick="card_select(this)">
-                    Village
-                </div>
-                <div class="button_container" id="(2,2)" onclick="card_select(this)">
-                    Salsa
-                </div>
-                <div class="button_container" id="(2,3)" onclick="card_select(this)">
-                    Swim
-                </div>
-                <div class="button_container" id="(3,0)" onclick="card_select(this)">
-                    Lake
-                </div>
-                <div class="button_container" id="(3,1)" onclick="card_select(this)">
-                    Salads
-                </div>
-                <div class="button_container" id="(3,2)" onclick="card_select(this)">
-                    Geo
-                </div>
-                <div class="button_container" id="(3,3)" onclick="card_select(this)">
-                    Psyche
-                </div>
+    <div class="game_container">
+        <div class="cards_container">
+            <div class="button_container" id="(0,0)" onclick="card_select(this)">
+                Eco
             </div>
-
-            <div class="mistakes_container">
-                Mistakes Remaining: <span id="lives">⚫ ⚫ ⚫ ⚫</span>
+            <div class="button_container" id="(0,1)" onclick="card_select(this)">
+                Scuba
             </div>
-
-            <div class="menu_container">
-                <button onclick="deselect()">Deselect All</button>
-                <button>Submit</button>
+            <div class="button_container" id="(0,2)" onclick="card_select(this)">
+                Pear
+            </div>
+            <div class="button_container" id="(0,3)" onclick="card_select(this)">
+                Sushi
+            </div>
+            <div class="button_container" id="(1,0)" onclick="card_select(this)">
+                Cook
+            </div>
+            <div class="button_container" id="(1,1)" onclick="card_select(this)">
+                Empanadas
+            </div>
+            <div class="button_container" id="(1,2)" onclick="card_select(this)">
+                Bagels
+            </div>
+            <div class="button_container" id="(1,3)" onclick="card_select(this)">
+                Row
+            </div>
+            <div class="button_container" id="(2,0)" onclick="card_select(this)">
+                Meteor
+            </div>
+            <div class="button_container" id="(2,1)" onclick="card_select(this)">
+                Village
+            </div>
+            <div class="button_container" id="(2,2)" onclick="card_select(this)">
+                Salsa
+            </div>
+            <div class="button_container" id="(2,3)" onclick="card_select(this)">
+                Swim
+            </div>
+            <div class="button_container" id="(3,0)" onclick="card_select(this)">
+                Lake
+            </div>
+            <div class="button_container" id="(3,1)" onclick="card_select(this)">
+                Salads
+            </div>
+            <div class="button_container" id="(3,2)" onclick="card_select(this)">
+                Geo
+            </div>
+            <div class="button_container" id="(3,3)" onclick="card_select(this)">
+                Music
             </div>
         </div>
-        
-    </body>
 
-    <script>
-        var selected = new Set();
-        var a1 = ["U3VzaGk=","RW1wYW5hZGFz","QmFnZWxz","U2FsYWRz"].sort();
-        var a2 = ["UGVhcg==","VmlsbGFnZQ==","TGFrZQ==","Um93"].sort();
-        var a3 = ["Q29vaw==","U2N1YmE=","U3dpbQ==","U2Fsc2E="].sort();
-        var a4 = ["RWNv","R2Vv","UHN5Y2hl","TWV0ZW9y"].sort();
+        <div class="mistakes_container">
+            Mistakes Remaining: <span id="lives">⚫ ⚫ ⚫ ⚫</span>
+        </div>
 
-        function card_select(card){
-            if (selected.has(card)) {
-                selected.delete(card)
-                card.classList.remove('card_selected')
-            } else if (selected.size == 4) {
-                return
-            } else {
-                selected.add(card)
-                card.classList.add('card_selected')
-            }
+        <div class="menu_container">
+            <button onclick="deselect()">Deselect All</button>
+            <button onclick="check()">Submit</button>
+        </div>
+
+        <div class="answers_container">
+            <h3>Categories:</h3>
+            <p>(Easy -> Hard)</p>
+            <div class="categories_container">
+                <div class="category" id="c1">
+                    <p>???</p>
+                </div>
+                <div class="category" id="c2">
+                    <p>???</p>
+                </div>
+                <div class="category" id="c3">
+                    <p>???</p>
+                </div>
+                <div class="category" id="c4">
+                    <p>???</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    var selected = new Set();
+    var a1 = ["QmFnZWxz", "RW1wYW5hZGFz", "U2FsYWRz", "U3VzaGk="].sort();
+    var a2 = ['Q29vaw==', 'U2Fsc2E=', 'U2N1YmE=', 'U3dpbQ=='].sort();
+    var a3 = ['R2Vv', 'RWNv', 'TWV0ZW9y', 'TXVzaWM='].sort();
+    var a4 = ['TGFrZQ==', 'UGVhcg==', 'Um93', 'VmlsbGFnZQ=='].sort();
+    
+
+    function card_select(card) {
+        if (selected.has(card)) {
+            selected.delete(card)
+            card.classList.remove('card_selected')
+        } else if (selected.size == 4) {
+            return
+        } else {
+            selected.add(card)
+            card.classList.add('card_selected')
         }
+    }
 
-        function check(){
-            if (selected.size != 4) {
-                return
-            } else {
-
-            }
-        }
-
-        function deselect(){
+    function check() {
+        if (selected.size != 4) {
+            return
+        } else {
+            var user_answer = [];
             selected.forEach((card) => {
-                card_select(card);
+                user_answer.push(btoa(card.textContent.trim()));
             })
+            user_answer.sort();
+            console.log(user_answer);
+
+            if (arraysEqual(user_answer, a1)) {
+                cat = document.getElementById("c1").children[0];
+                cat.textContent = atob("Rm9vZCBvbiBDYW1wdXM=");
+            } else if (arraysEqual(user_answer, a2)) {
+                cat = document.getElementById("c2").children[0];
+                cat.textContent = atob("Q2x1YnM=");
+            } else if (arraysEqual(user_answer, a3)) {
+                cat = document.getElementById("c3").children[0];
+                cat.textContent = atob("LW9sb2d5IE1ham9ycw==");
+            } else if (arraysEqual(user_answer, a4)) {
+                cat = document.getElementById("c4").children[0];
+                cat.textContent = atob("UGFydCBvZiBIb3VzaW5nIE5hbWVz");
+            } else {
+
+            }
         }
-    </script>
+    }
+
+    function deselect() {
+        selected.forEach((card) => {
+            card_select(card);
+        })
+    }
+
+    function arraysEqual(a, b) {
+        if (a.length != b.length) return false;
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+</script>
 
 </html>
