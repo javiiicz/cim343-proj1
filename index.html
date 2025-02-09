@@ -16,7 +16,7 @@
     <div class="game_container">
         <div class="cards_container">
             <div class="button_container" id="(0,0)" onclick="card_select(this)">
-                Eco
+                Zoo
             </div>
             <div class="button_container" id="(0,1)" onclick="card_select(this)">
                 Scuba
@@ -70,13 +70,13 @@
         </div>
 
         <div class="menu_container">
+            <button onclick="shuffle()">Suffle</button>
             <button onclick="deselect()">Deselect All</button>
             <button onclick="check()">Submit</button>
         </div>
 
         <div class="answers_container">
             <h3>Categories:</h3>
-            <p>(Easy -> Hard)</p>
             <div class="categories_container">
                 <div class="category" id="c1">
                     <p>???</p>
@@ -91,6 +91,7 @@
                     <p>???</p>
                 </div>
             </div>
+            <p>(Easy -> Hard)</p>
         </div>
     </div>
 
@@ -100,9 +101,9 @@
     var selected = new Set();
     var a1 = ["QmFnZWxz", "RW1wYW5hZGFz", "U2FsYWRz", "U3VzaGk="].sort();
     var a2 = ['Q29vaw==', 'U2Fsc2E=', 'U2N1YmE=', 'U3dpbQ=='].sort();
-    var a3 = ['R2Vv', 'RWNv', 'TWV0ZW9y', 'TXVzaWM='].sort();
+    var a3 = ['R2Vv', 'TWV0ZW9y', 'TXVzaWM=', 'Wm9v'].sort();
     var a4 = ['TGFrZQ==', 'UGVhcg==', 'Um93', 'VmlsbGFnZQ=='].sort();
-    
+    var lives = 4;
 
     function card_select(card) {
         if (selected.has(card)) {
@@ -117,7 +118,7 @@
     }
 
     function check() {
-        if (selected.size != 4) {
+        if (lives == 0 || selected.size != 4) {
             return
         } else {
             var user_answer = [];
@@ -156,7 +157,10 @@
                     card_select(card)
                 })
             } else {
-
+                // Wrong guess
+                lives--;
+                livesCounter = document.getElementById('lives');
+                livesCounter.textContent = "⚫ ".repeat(lives);
             }
         }
     }
@@ -165,6 +169,31 @@
         selected.forEach((card) => {
             card_select(card);
         })
+    }
+
+    function shuffle() {
+        for (var i = 15; i > 0; i--) {
+            var j = Math.floor(Math.random() * 16)
+            var si = "("+Math.floor(i/4)+","+i%4+")";
+            var sj = "("+Math.floor(j/4)+","+j%4+")";
+            var card_i = document.getElementById(si);
+            var card_j = document.getElementById(sj);
+            swap(card_i, card_j);
+        }
+    }
+
+    function swap(a,b){
+        if (selected.has(a) && !selected.has(b)) {
+            card_select(a);
+            card_select(b);
+        } else if (!selected.has(a) && selected.has(b)) {
+            card_select(b);
+            card_select(a);
+        }
+
+        var temp_text = a.textContent;
+        a.textContent = b.textContent;
+        b.textContent = temp_text;
     }
 
     function arraysEqual(a, b) {

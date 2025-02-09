@@ -90,6 +90,7 @@ button:active {
 .category {
     text-align: center;
     width: 150px;
+    height: 100px;
     padding: 30px;
     font-size: large;
     display: flex;
