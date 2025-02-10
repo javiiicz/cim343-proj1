@@ -127,51 +127,101 @@
                 user_answer.push(btoa(card.textContent.trim()));
             })
             user_answer.sort();
-            console.log(user_answer);
-
+            
+            var set_copy = new Set(selected);
+            deselect();
             if (arraysEqual(user_answer, a1)) {
                 cat = document.getElementById("c1").children[0];
                 cat.textContent = atob("Rm9vZCBvbiBDYW1wdXM=");
-                var c = 0;
-                selected.forEach((card) => {
-                    card.classList.add("solved1")
-                    card_select(card)
-                    strong_swap(card, document.getElementById("("+found+","+c+")"));
-                    c++;
+                
+                set_copy.forEach((card) => {
+                    card.classList.add("solved1");
+                    if (card.id[1] == found) {
+                        set_copy.delete(card);
+                    }
                 })
+                for (var c = 0; c < 4; c++) {
+                    target = document.getElementById("(" + found + "," + c + ")");
+                    if (user_answer.indexOf(btoa(target.textContent.trim())) >= 0) {
+                        continue;
+                    } else {
+                        var keys = Array.from(set_copy.keys());
+                        console.log(keys);
+                        strong_swap(keys[0], target);
+                        set_copy.delete(keys[0]);
+                    }
+                }
+
                 found++;
             } else if (arraysEqual(user_answer, a2)) {
                 cat = document.getElementById("c2").children[0];
                 cat.textContent = atob("Q2x1YnM=");
-                var c = 0;
-                selected.forEach((card) => {
-                    card.classList.add("solved2")
-                    card_select(card)
-                    strong_swap(card, document.getElementById("("+found+","+c+")"));
-                    c++;
+
+                set_copy.forEach((card) => {
+                    card.classList.add("solved2");
+                    if (card.id[1] == found) {
+                        set_copy.delete(card);
+                    }
                 })
+                for (var c = 0; c < 4; c++) {
+                    target = document.getElementById("(" + found + "," + c + ")");
+                    if (user_answer.indexOf(btoa(target.textContent.trim())) >= 0) {
+                        continue;
+                    } else {
+                        var keys = Array.from(set_copy.keys());
+                        console.log(keys);
+                        strong_swap(keys[0], target);
+                        set_copy.delete(keys[0]);
+                    }
+                }
+
                 found++;
             } else if (arraysEqual(user_answer, a3)) {
                 cat = document.getElementById("c3").children[0];
                 cat.textContent = atob("LW9sb2d5IE1ham9ycw==");
                 var c = 0;
-                selected.forEach((card) => {
-                    card.classList.add("solved3")
-                    card_select(card)
-                    strong_swap(card, document.getElementById("("+found+","+c+")"));
-                    c++;
+                
+                set_copy.forEach((card) => {
+                    card.classList.add("solved3");
+                    if (card.id[1] == found) {
+                        set_copy.delete(card);
+                    }
                 })
+                for (var c = 0; c < 4; c++) {
+                    target = document.getElementById("(" + found + "," + c + ")");
+                    if (user_answer.indexOf(btoa(target.textContent.trim())) >= 0) {
+                        continue;
+                    } else {
+                        var keys = Array.from(set_copy.keys());
+                        console.log(keys);
+                        strong_swap(keys[0], target);
+                        set_copy.delete(keys[0]);
+                    }
+                }
+
                 found++;
             } else if (arraysEqual(user_answer, a4)) {
                 cat = document.getElementById("c4").children[0];
                 cat.textContent = atob("UGFydCBvZiBIb3VzaW5nIE5hbWVz");
-                var c = 0;
-                selected.forEach((card) => {
-                    card.classList.add("solved4")
-                    card_select(card)
-                    strong_swap(card, document.getElementById("("+found+","+c+")"));
-                    c++;
+                
+                set_copy.forEach((card) => {
+                    card.classList.add("solved4");
+                    if (card.id[1] == found) {
+                        set_copy.delete(card);
+                    }
                 })
+                for (var c = 0; c < 4; c++) {
+                    target = document.getElementById("(" + found + "," + c + ")");
+                    if (user_answer.indexOf(btoa(target.textContent.trim())) >= 0) {
+                        continue;
+                    } else {
+                        var keys = Array.from(set_copy.keys());
+                        console.log(keys);
+                        strong_swap(keys[0], target);
+                        set_copy.delete(keys[0]);
+                    }
+                }
+
                 found++;
             } else {
                 // Wrong guess
@@ -179,6 +229,7 @@
                 livesCounter = document.getElementById('lives');
                 livesCounter.textContent = "⚫ ".repeat(lives);
             }
+            
         }
     }
 
