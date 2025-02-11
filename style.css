@@ -21,6 +21,7 @@ body {
     align-items: center;
     gap: 20px;
     padding: 10px;
+    position: relative;
 }
 
 .cards_container {
@@ -138,4 +139,23 @@ button:active {
     color: #fff;
     background-color: #b55ce9;
     pointer-events: none;
+}
+
+.alert_container{
+    background-color: #000;
+    color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: 600;
+    position: absolute;
+    top: 3%;
+    visibility: hidden;
+    transition: all .5s;
+    user-select: none;
+    opacity: 80%;
+}
+
+.alert_container.visible {
+    visibility: visible;
 }
