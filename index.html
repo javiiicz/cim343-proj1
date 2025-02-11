@@ -22,7 +22,7 @@
                 Scuba
             </div>
             <div class="button_container" id="(0,2)" onclick="card_select(this)">
-                Pear
+                Spice
             </div>
             <div class="button_container" id="(0,3)" onclick="card_select(this)">
                 Sushi
@@ -37,13 +37,13 @@
                 Bagels
             </div>
             <div class="button_container" id="(1,3)" onclick="card_select(this)">
-                Row
+                Gardens
             </div>
             <div class="button_container" id="(2,0)" onclick="card_select(this)">
                 Meteor
             </div>
             <div class="button_container" id="(2,1)" onclick="card_select(this)">
-                Village
+                Beach
             </div>
             <div class="button_container" id="(2,2)" onclick="card_select(this)">
                 Salsa
@@ -52,7 +52,7 @@
                 Swim
             </div>
             <div class="button_container" id="(3,0)" onclick="card_select(this)">
-                Lake
+                Heat
             </div>
             <div class="button_container" id="(3,1)" onclick="card_select(this)">
                 Salads
@@ -101,8 +101,9 @@
     var selected = new Set();
     var a1 = ["QmFnZWxz", "RW1wYW5hZGFz", "U2FsYWRz", "U3VzaGk="].sort();
     var a2 = ['Q29vaw==', 'U2Fsc2E=', 'U2N1YmE=', 'U3dpbQ=='].sort();
-    var a3 = ['R2Vv', 'TWV0ZW9y', 'TXVzaWM=', 'Wm9v'].sort();
-    var a4 = ['TGFrZQ==', 'UGVhcg==', 'Um93', 'VmlsbGFnZQ=='].sort();
+    var a3 = ['QmVhY2g=', 'R2FyZGVucw==', 'U3BpY2U=', 'SGVhdA=='].sort();
+    var a4 = ['R2Vv', 'TWV0ZW9y', 'TXVzaWM=', 'Wm9v'].sort();
+
     var lives = 4;
     var found = 0;
 
@@ -178,7 +179,7 @@
                 found++;
             } else if (arraysEqual(user_answer, a3)) {
                 cat = document.getElementById("c3").children[0];
-                cat.textContent = atob("LW9sb2d5IE1ham9ycw==");
+                cat.textContent = atob("TWlhbWkgX19fX18=");
                 var c = 0;
                 
                 set_copy.forEach((card) => {
@@ -202,7 +203,7 @@
                 found++;
             } else if (arraysEqual(user_answer, a4)) {
                 cat = document.getElementById("c4").children[0];
-                cat.textContent = atob("UGFydCBvZiBIb3VzaW5nIE5hbWVz");
+                cat.textContent = atob("LW9sb2d5IE1ham9ycw==");
                 
                 set_copy.forEach((card) => {
                     card.classList.add("solved4");
