@@ -112,6 +112,8 @@
     var lives = 4;
     var found = 0;
 
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
     function card_select(card) {
         if (selected.has(card)) {
             selected.delete(card)
@@ -126,7 +128,7 @@
 
     function check() {
         if (lives == 0 || selected.size != 4) {
-            return
+            return;
         }
 
         var user_answer = [];
@@ -134,6 +136,16 @@
             user_answer.push(btoa(card.textContent.trim()));
         })
         user_answer.sort();
+
+        if (has_exactly_three(user_answer)) {
+            alert = document.getElementById("alert");
+            alert.textContent = "One off...";
+            alert.classList.add("visible")
+            setTimeout(() => {
+                alert.classList.remove("visible")
+            }, 1500)
+            return;
+        }
         
         var set_copy = new Set(selected);
         deselect();
@@ -244,7 +256,6 @@
                 alert = document.getElementById("alert");
                 alert.textContent = "Game Over...";
                 alert.classList.add("visible")
-                document.body.classList.add()
             }
         }
         
@@ -297,6 +308,20 @@
             if (a[i] !== b[i]) return false;
         }
         return true;
+    }
+
+    function has_exactly_three(user_answer) {
+        const answers = [a1,a2,a3,a4];
+        for (var i = 0; i < answers.length; i++) {
+            const ans = answers[i];
+            var counter = 0;
+            for (var j = 0; j < user_answer.length; j++) {
+                var word = user_answer[j];
+                if (ans.includes(word)) { counter++; };
+            }
+            if (counter == 3) { return true; }
+        }
+        return false;
     }
 </script>
 
