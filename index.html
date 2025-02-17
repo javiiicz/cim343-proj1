@@ -104,6 +104,7 @@
 
 <script>
     var selected = new Set();
+    // Encrypted solutions 🤫
     var a1 = ["QmFnZWxz", "RW1wYW5hZGFz", "U2FsYWRz", "U3VzaGk="].sort();
     var a2 = ['Q29vaw==', 'U2Fsc2E=', 'U2N1YmE=', 'U3dpbQ=='].sort();
     var a3 = ['QmVhY2g=', 'R2FyZGVucw==', 'U3BpY2U=', 'SGVhdA=='].sort();
@@ -112,31 +113,79 @@
     var lives = 4;
     var found = 0;
 
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-
+    // Selecting a card
     function card_select(card) {
         if (selected.has(card)) {
+            // If in set, removes from set and removes class
             selected.delete(card)
             card.classList.remove('card_selected')
         } else if (selected.size == 4) {
+            // Will not let select if user already has 4
             return
         } else {
+            // If not in set, adds it to set to keep track and adds class
             selected.add(card)
             card.classList.add('card_selected')
         }
     }
 
+    // Deselects all cards
+    // Just cycles through set and calls card_select on them
+    function deselect() {
+        selected.forEach((card) => {
+            card_select(card);
+        })
+    }
+
+    // Randomly swaps (weak swap, only slection and text)
+    function shuffle() {
+        for (var i = 15; i > found * 4; i--) {
+            var j = Math.floor(Math.random() * (16 - found*4) + found*4);
+            var si = "("+Math.floor(i/4)+","+i%4+")";
+            var sj = "("+Math.floor(j/4)+","+j%4+")";
+            var card_i = document.getElementById(si);
+            var card_j = document.getElementById(sj);
+            swap(card_i, card_j);
+        }
+    }
+
+    // Performs the swap, have to be careful to deselect and select in the correct order
+    function swap(a,b){
+        if (selected.has(a) && !selected.has(b)) {
+            card_select(a);
+            card_select(b);
+        } else if (!selected.has(a) && selected.has(b)) {
+            card_select(b);
+            card_select(a);
+        }
+
+        var temp_text = a.textContent;
+        a.textContent = b.textContent;
+        b.textContent = temp_text;
+    }
+
+    // Funtion to wait a little before doing someting
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    // Function to check if the selected cards are correct
     function check() {
+        // Ignore if game over or user did not select 4 cards
         if (lives == 0 || selected.size != 4) {
             return;
         }
 
+        // Store an encrypted copy of the answers (and sort!), this is what is going to be compared
         var user_answer = [];
         selected.forEach((card) => {
             user_answer.push(btoa(card.textContent.trim()));
         })
         user_answer.sort();
 
+        // Copy the set since we are going to deselect it later and we want to keep track of the card objects
+        var set_copy = new Set(selected);
+        deselect();
+
+        // This is for the "One off" popup
         if (has_exactly_three(user_answer)) {
             alert = document.getElementById("alert");
             alert.textContent = "One off...";
@@ -144,11 +193,10 @@
             setTimeout(() => {
                 alert.classList.remove("visible")
             }, 1500)
-            return;
-        }
-        
-        var set_copy = new Set(selected);
-        deselect();
+        } 
+
+        // Check the user_answer array one by one and do the same thing if it matches
+        // Reveal hint, add solved style, move to the top (using the strong swap!)
         if (arraysEqual(user_answer, a1)) {
             cat = document.getElementById("c1").children[0];
             cat.textContent = atob("Rm9vZCBvbiBDYW1wdXM=");
@@ -159,13 +207,15 @@
                     set_copy.delete(card);
                 }
             })
+
+            // We move using the id's of the card and the number of found solutions
             for (var c = 0; c < 4; c++) {
                 target = document.getElementById("(" + found + "," + c + ")");
+                // Skip swapping if card is already on the top row
                 if (user_answer.indexOf(btoa(target.textContent.trim())) >= 0) {
                     continue;
                 } else {
                     var keys = Array.from(set_copy.keys());
-                    console.log(keys);
                     strong_swap(keys[0], target);
                     set_copy.delete(keys[0]);
                 }
@@ -189,7 +239,6 @@
                     continue;
                 } else {
                     var keys = Array.from(set_copy.keys());
-                    console.log(keys);
                     strong_swap(keys[0], target);
                     set_copy.delete(keys[0]);
                 }
@@ -214,7 +263,6 @@
                     continue;
                 } else {
                     var keys = Array.from(set_copy.keys());
-                    console.log(keys);
                     strong_swap(keys[0], target);
                     set_copy.delete(keys[0]);
                 }
@@ -238,7 +286,6 @@
                     continue;
                 } else {
                     var keys = Array.from(set_copy.keys());
-                    console.log(keys);
                     strong_swap(keys[0], target);
                     set_copy.delete(keys[0]);
                 }
@@ -252,47 +299,25 @@
             livesCounter = document.getElementById('lives');
             livesCounter.textContent = "⚫ ".repeat(lives);
 
+            // Game over condition, show alert
             if (lives == 0) {
                 alert = document.getElementById("alert");
                 alert.textContent = "Game Over...";
                 alert.classList.add("visible")
             }
         }
-        
-        
     }
 
-    function deselect() {
-        selected.forEach((card) => {
-            card_select(card);
-        })
-    }
-
-    function shuffle() {
-        for (var i = 15; i > found * 4; i--) {
-            var j = Math.floor(Math.random() * (16 - found*4) + found*4);
-            var si = "("+Math.floor(i/4)+","+i%4+")";
-            var sj = "("+Math.floor(j/4)+","+j%4+")";
-            var card_i = document.getElementById(si);
-            var card_j = document.getElementById(sj);
-            swap(card_i, card_j);
+    // Check if two arrays are equal, element per element
+    function arraysEqual(a, b) {
+        if (a.length != b.length) return false;
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i] !== b[i]) return false;
         }
+        return true;
     }
 
-    function swap(a,b){
-        if (selected.has(a) && !selected.has(b)) {
-            card_select(a);
-            card_select(b);
-        } else if (!selected.has(a) && selected.has(b)) {
-            card_select(b);
-            card_select(a);
-        }
-
-        var temp_text = a.textContent;
-        a.textContent = b.textContent;
-        b.textContent = temp_text;
-    }
-
+    // Performs a strong swap, swap text and class information
     function strong_swap(a,b){
         var temp_text = a.textContent;
         var temp_class = a.className;
@@ -302,14 +327,7 @@
         b.className = temp_class;
     }
 
-    function arraysEqual(a, b) {
-        if (a.length != b.length) return false;
-        for (var i = 0; i < a.length; ++i) {
-            if (a[i] !== b[i]) return false;
-        }
-        return true;
-    }
-
+    // Checks if the user has exactly 3 words correct
     function has_exactly_three(user_answer) {
         const answers = [a1,a2,a3,a4];
         for (var i = 0; i < answers.length; i++) {
@@ -323,6 +341,7 @@
         }
         return false;
     }
+
 </script>
 
 </html>
